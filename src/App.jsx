@@ -23,6 +23,7 @@ const USERS = [
         role: 'graduate'
     },
 ];
+//! Children 
 const App = () => (
 	<UsersList users={USERS}>
 		<Title>Listado de usuarios</Title>		
