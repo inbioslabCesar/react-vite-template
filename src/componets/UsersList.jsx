@@ -2,6 +2,7 @@ import { useState } from 'react';
 import style from './UsersList.module.css';
 import UsersListFilters from './UsersListFilters';
 import UsersListRows from './UsersListRows';
+import { UsersContext } from '../lib/contexts/UsersContext';
 
 const UsersList = ({ initialUsers }) => {
 	const { search, onlyActive, sortBy, ...setFiltersFuntions } = getState();
@@ -20,10 +21,9 @@ const UsersList = ({ initialUsers }) => {
 				sortBy={sortBy}
 				{...setFiltersFuntions}
 			/>
-			<UsersListRows
-				users={usersFiltered}
-				toggleUsersActive={toggleUsersActive}
-			/>
+			<UsersContext.Provider value={{ toggleUsersActive }}>
+				<UsersListRows users={usersFiltered} />
+			</UsersContext.Provider>
 		</div>
 	);
 };
