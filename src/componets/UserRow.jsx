@@ -1,19 +1,15 @@
 
-import { useContext } from 'react';
+import UserDisplay from './UserDisplay';
 import UserRole from './UserRole';
 import style from './UserRow.module.css';
 import UserStatus from './UserStatus';
-import { UsersContext } from '../lib/contexts/UsersContext';
 
 //! Un Hook solo puede ser llamado dentro de la funcion
-const UserRow = ({ id, name, active, role }) => {
-	const { toggleUsersActive } = useContext(UsersContext);
-
-	console.log(toggleUsersActive)
+const UserRow = ({ username, name, active, role }) => {
 	return (
 		<div className={style.wrapper}>
 			<div className={style.name}>
-				<span>{name}</span>
+				<UserDisplay username={username} name={name} />
 			</div>
 			<div className={style.status}>
 				<UserStatus active={active} />
@@ -21,11 +17,7 @@ const UserRow = ({ id, name, active, role }) => {
 			<div className={style.role}>
 				<UserRole role={role} />
 			</div>
-			<div className={style.action}>
-				<button onClick={() => toggleUsersActive(id)}>
-					{active ? 'Desactivar' : 'Activar'}
-				</button>
-			</div>
+			<div className={style.action}></div>
 		</div>
 	);
 };
