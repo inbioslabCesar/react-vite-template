@@ -4,7 +4,7 @@ const ROLE_STYLES = {
 	teacher: ['profesor', style.teacher],
 	student: ['alumno', style.student],
 	graduate: ['egresado', style.graduate],
-	other: ['otro', style.other]
+	other: ['otros', style.other]
 };
 //! Condicion or ALT + 124 ||
 const UserRole = ({ role }) => {
