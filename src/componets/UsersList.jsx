@@ -2,6 +2,12 @@ import { useState } from 'react';
 import style from './UsersList.module.css';
 import UsersListFilters from './UsersListFilters';
 import UsersListRows from './UsersListRows';
+import {
+	filterActiveUsers,
+	filterUsersByName,
+	sortUser
+} from '../lib/users/filterUsers';
+import { useFilters } from '../lib/hooks/useFilters';
 
 const UsersList = ({ initialUsers }) => {
 	const { search, onlyActive, sortBy, ...setFiltersFuntions } = useFilters();
@@ -24,91 +30,11 @@ const UsersList = ({ initialUsers }) => {
 		</div>
 	);
 };
-const useFilters = () => {
-	const [filters, setFilters] = useState({
-		search: '',
-		onlyActive: false,
-		sortBy: 0
-	});
 
-	const setSearch = search =>
-		setFilters({
-			...filters,
-			search
-		});
-	const setOnlyActive = onlyActive => {
-		if(onlyActive &&  filters.sortBy === 3)
-		setFilters({
-			...filters,
-			sortBy: 0,
-			onlyActive
-		});
-		else 
-		setFilters({
-			...filters,
-			onlyActive
-		});
-	};
-		const setSortBy = sortBy =>
-		setFilters({
-			...filters,
-			sortBy
-		});
-
-	return {
-		...filters,
-		setSearch,
-		setOnlyActive,
-		setSortBy
-	};
-};
 const useUsers = initialUsers => {
 	const [users, setUsers] = useState(initialUsers);
 
 	return { users };
-};
-
-const sortUser = (users, sortBy) => {
-	const sortUsers = [...users];
-	switch (sortBy) {
-		case 1:
-			return sortUsers.sort((a, b) => {
-				if (a.name > b.name) return 1;
-				if (a.name < b.name) return -1;
-				return 0;
-			});
-		case 2:
-			return sortUsers.sort((a, b) => {
-				if (a.role === b.role) return 0;
-				if (a.role === 'teacher') return -1;
-				if (a.role === 'student' && b.role === 'other') return 1;
-				return 1;
-			});
-		case 3:
-			return sortUsers.sort((a, b) => {
-				if (a.active === b.active) return 0;
-				if (a.active && !b.active) return -1;
-				return 1;
-			});
-
-		default:
-			return sortUsers;
-	}
-};
-
-const filterActiveUsers = (users, active) => {
-	if (!active) return [...users];
-
-	return users.filter(user => user.active);
-};
-const filterUsersByName = (users, search) => {
-	if (!search) return [...users];
-
-	const lowerCaseSearch = search.toLocaleLowerCase();
-
-	return users.filter(user =>
-		user.name.toLowerCase().includes(lowerCaseSearch)
-	);
 };
 
 export default UsersList;

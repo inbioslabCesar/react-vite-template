@@ -23,7 +23,7 @@ const USERS = [
         username: 'César',
         name: 'César Perez Guimaraez',
         active: true,
-        role: 'graduate'
+        role: 'student'
     },
 ];
 //! Children 
