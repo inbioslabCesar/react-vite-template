@@ -1,7 +1,7 @@
 import { SORT_OPTIONS } from "../../constants/sortOptions";
 import { USER_ROLE } from "../../constants/userRoles";
 
-export const sortUser = (users, sortBy) => {
+export const sortUsers = (users, sortBy) => {
 	const sortUsers = [...users];
 	switch (sortBy) {
 		case SORT_OPTIONS.NAME:
@@ -42,4 +42,10 @@ export const filterUsersByName = (users, search) => {
 	return users.filter(user =>
 		user.name.toLowerCase().includes(lowerCaseSearch)
 	);
+};
+
+export const paginateUsers = (users, page, itemsPerPage) => {
+	const starIndex = (page - 1) * itemsPerPage;
+	const endIndex = starIndex + itemsPerPage;
+	return users.slice(starIndex, endIndex);
 };

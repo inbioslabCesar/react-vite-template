@@ -19,12 +19,6 @@ const USERS = [
         active: false,
         role: 'student'
     },
-    {
-        username: 'César',
-        name: 'César Perez Guimaraez',
-        active: true,
-        role: 'student'
-    },
 ];
 //! Children 
 const App = () => (
